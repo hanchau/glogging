@@ -15,10 +15,19 @@ categories = [
 ]
 +++
 
-This article offers a setup of a generic application framework [Gearman](https://github.com/hanchau/gearman_to_the_rescue) for Distributed processing.
+This article offers a setup of [Gearman](https://github.com/hanchau/gearman_to_the_rescue) for Parallel/Distributed processing.
 <!--more-->
 
-### An elegant and generic application framework for distributed processing.
+### An elegant and generic application framework for parallel and distributed processing.
+
+#### A web cast to get a good idea about the architecture of the Gearman.
+---
+
+{{< youtube YoAQ7Zsl9bE >}}
+
+<br>
+
+
 #### Initial Setup
 
 1. Setup gearadmin and gearman with.
