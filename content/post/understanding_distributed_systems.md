@@ -92,9 +92,15 @@ Thanks, Cheers & Happy Glogging.
 > A Note on COVID-19 pandemic: Keep Calm, Eat Well & Stay @ Home.
 
 
-#### A cool video to briefly get the downsides of distributed systems.
+#### Cool videos to briefly get the downsides of distributed systems.
 ---
 
 {{< youtube Y6Ev8GIlbxc >}}
+
+<br>
+
+---
+
+{{< youtube tpspO9K28PM >}}
 
 <br>
