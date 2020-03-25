@@ -104,3 +104,11 @@ Thanks, Cheers & Happy Glogging.
 {{< youtube tpspO9K28PM >}}
 
 <br>
+
+#### A more detailed version.
+
+---
+
+{{< youtube eSaFVX4izsQ >}}
+
+<br>
