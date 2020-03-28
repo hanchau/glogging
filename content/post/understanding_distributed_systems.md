@@ -21,7 +21,7 @@ This article offers a basic understanding of the distributed systems.
 
 In the last post I gave a brief about the concept of parallel processing through some examples. Now we know how to make our systems more parallel in nature, I think it's time learn the concept of distributed processing, how it's different from parallel processing and how to integrate it in our existing projects. There are lots of definitions of Distributed System but I'll give you the one I like the most which is obviously mine (HAHA).
 
-> A system having a collection of multiple computer systems located at different geographical locations.
+> A system having a set of computer systems located at different geographical locations appears as a single unit to the end user.
 
 Some examples of distributed systems are:
 

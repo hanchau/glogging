@@ -1,7 +1,14 @@
 #!/bin/sh
 
 # If a command fails then the deploy stops
+
 set -e
+
+git add .
+
+git commit -m "pushing changes to the post"
+
+ggpush
 
 printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
 
