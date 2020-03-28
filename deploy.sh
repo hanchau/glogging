@@ -8,7 +8,7 @@ git add .
 
 git commit -m "pushing changes to the post"
 
-ggpush
+git push origin master
 
 printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
 
