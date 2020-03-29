@@ -41,11 +41,11 @@ You have a stream of operations, you can always maintain a queue and do the foll
 1. while not_empty(Q):
 2. op = dequeue(Q)
 3. if validate(op):
-4.       response = exec(op)
-5.       send_back(response)
+4.     response = exec(op)
+5.     send_back(response)
 6. else:
-7.      response = op_not_found_error()
-8.      send_back(response)
+7.     response = op_not_found_error()
+8.     send_back(response)
 ```
 
 So we can clearly see that the machine is Consistent, it eithers gives you the *recent write* (because all the operations are sequential) or the error, We have a single source of truth here, i.e our beautiful machine's state. The Availability of the machine depends on the network and the machine itself. Now, we want to imporve the Availability of the machine. If we add one more machine to the system and want to implement the same *queue* Q that we did for a single machine we can do the following.
@@ -54,11 +54,11 @@ So we can clearly see that the machine is Consistent, it eithers gives you the *
 
 1. def exec_on_machine(op, machine_name):
 3.    if validate(op):
-4.        response = exec_mac(op, machine_id)
-5.        send_back(response)
+4.      response = exec_mac(op, machine_id)
+5.      send_back(response)
 6.    else:
-7.        response = op_not_found_error()
-8.        send_back(response)
+7.      response = op_not_found_error()
+8.      send_back(response)
 9.
 10. while not_empty(Q):
 11. op = dequeue(Q)
@@ -67,7 +67,7 @@ So we can clearly see that the machine is Consistent, it eithers gives you the *
 14.     sync_states(A,B)
 15. else:
 16.     exec_on_machine(op, B)
-17.     send_states(B,A)
+17.     sync_states(B,A)
 ```
 
 Hurray!! We implemented a more Availabile system now... NO we haven't. Consider the following scenario-
