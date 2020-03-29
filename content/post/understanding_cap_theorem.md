@@ -1,6 +1,6 @@
 +++
 author = "hanchau"
-title = "CAP theoram!"
+title = "CAP theorem!"
 date = "2020-03-22"
 description = "Pain of the distributed state."
 tags = [
@@ -14,12 +14,12 @@ categories = [
 ]
 +++
 
-This article offers a basic understanding of the CAP theoram.
+This article offers a basic understanding of the CAP theorem.
 <!--more-->
 
-#### What is CAP theoram?
+#### What is CAP theorem?
 
-In the last post I discussed why we need distributed systems and how to setup gearman on a cluster. In this post I'll try to convince you that CAP theoram is indeed a *"theoram"*. Anyways, We like distributed systems!! (because they provide us the [features](https://medium.com/system-design-blog/key-characteristics-of-distributed-systems-781c4d92cce3) that we really want) but..., Are they trivial to implement?.
+In the last post I discussed why we need distributed systems and how to setup gearman on a cluster. In this post I'll try to convince you that CAP theorem is indeed a *"theorem"*. Anyways, We like distributed systems!! (because they provide us the [features](https://medium.com/system-design-blog/key-characteristics-of-distributed-systems-781c4d92cce3) that we really want) but..., Are they trivial to implement?.
 
 My colleague once said
 > More code => More Complexity => More Monster Bugs => More Pain
