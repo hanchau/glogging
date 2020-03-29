@@ -76,6 +76,6 @@ Hurray!! We implemented a more Availabile system now... NO we haven't. Consider 
 Given queue of operation requests- Q = object.setState(10) | object.setState(15) | object.getState()
 
 ```
-coming soon...
+coming soon..
 
 Thanks, Cheers & Happy Glogging.
