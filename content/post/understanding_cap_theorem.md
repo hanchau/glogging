@@ -1,7 +1,7 @@
 +++
 author = "hanchau"
 title = "CAP theorem!"
-date = "2020-03-22"
+date = "2020-03-29"
 description = "Pain of the distributed state."
 tags = [
     "distributed systems",
