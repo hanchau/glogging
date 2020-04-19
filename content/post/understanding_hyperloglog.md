@@ -23,7 +23,7 @@ Quoting [wikipedia](https://en.wikipedia.org/wiki/Cardinality), the Cardinality 
 
 #### Cardinality Estimation Algorithm
 
-In last post we discussed CAP theorem and saw why it becomes hard to make systems Availabile and Consistent when there are potential partitions in the systems. I'was thinking about my next post back then and finialized Consistent Hashing, But then I came across an idea to first write about HyperLogLog beacause of its Elegance and Power.
+In last post we discussed CAP theorem and saw why it becomes hard to make systems Availabile and Consistent when there are potential partitions in the systems. I was thinking about my next post back then and finialized Consistent Hashing, But then I came across an idea to first write about HyperLogLog beacause of its Elegance and Power.
 
 Let's jump into it. I'm just gonna throw a problem at you.
 ```
