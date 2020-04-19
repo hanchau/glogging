@@ -64,7 +64,7 @@ Some fundamental operations are -
 10. L = Load(element)                     # Space Complexity = O(n)
 11. crdnlty = distinct(L)                 # Time Complexity = O(n)
 ```
-Approach 1 simply maintains a hasmap in the memory. So whenever a new element comes, it looks up the element in the map and if it exists then it updates the count of that element and if the element doesnt exist then it updates the hasmap with the element.
+Approach 1 simply maintains a hasmap in the memory. So whenever a new element comes, it looks up the element in the map and if it exists then it updates the count of that element and if the element doesnt exist then it updates the hasmap with that element.
 
 
 Space Complexity | Time Complexity | Estimation Error %
