@@ -49,7 +49,7 @@ Some fundamental operations are -
 - Lookup(x,map): lookup x in a map.
 
 
-##### Approach 1: Maintains a Hash Map
+##### Approach 1: Maintain a Hash Map
 
 ```
 1. def distinct(L):
