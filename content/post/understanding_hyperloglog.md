@@ -32,7 +32,7 @@ We have a list of elements and we want to count the number of distinct elements 
 
 > NOTE: Before proceeding please give it some thoughts. Few hints: Can we do it in one parse. Think of bloom filters. Think of approximating it. Think of upper bounding it, cuz every finite set must have finite distinct elements, right?
 
-This all have started with counting, The list example is just to simplify it. The real use case would be to estimate big number like-
+All of this initially started with counting, The list example is just to simplify it. The real use case would be to estimate big number like-
 ```
 I have a webpage and I want to count the distinct IPs that have landed on the page.
 ```
