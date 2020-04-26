@@ -23,7 +23,7 @@ Quoting [wikipedia](https://en.wikipedia.org/wiki/Cardinality), the Cardinality 
 
 #### Cardinality Estimation Algorithm
 
-In last post we discussed CAP theorem and saw why it becomes hard to make systems Availabile and Consistent when there are potential partitions in the systems. I was thinking about my next post back then and finialized Consistent Hashing, But then I came across an idea to first write about HyperLogLog beacause of its Elegance and Power.
+In the last post we discussed CAP theorem and saw why it becomes hard to make systems Available and Consistent when there are potential partitions in the systems. I was thinking about my next post back then and finalized Consistent Hashing, But then I came across an idea to first write about HyperLogLog because of its Elegance and Power.
 
 Let's jump into it. I'm just gonna throw a problem at you.
 ```
@@ -37,10 +37,10 @@ Initially, All of this started with counting, The above example is just an abstr
 I have a webpage and I want to maintain a counter of the distinct IPs that have landed on the page.
 (Also the page is distributed over multiple servers)
 ```
-Let's sart solving it.
+Let's start solving it.
 
 #### Famework
-We'll take these points in consideration when we'll solve the problem with multiple approaches -
+We'll take these points into consideration when we'll solve the problem with multiple approaches -
 - Space Complexity
 - Time Complexity
 - Estimation error
@@ -93,7 +93,7 @@ Whenever a new element comes, dump it into the big data store, and rerun the [co
 17.
 18. main()
 ```
-Approach 1: It is the trivial approach. It stores the elements into the disk and it has to load the elements into the memory every time it needs to calculate the Cardinality.
+Approach 1: It is a trivial approach. It stores the elements into the disk and it has to load the elements into the memory every time it needs to calculate the Cardinality.
 
 Space Complexity | Time Complexity | Estimation Error %
 -----------------|-----------------|-------------------
@@ -122,7 +122,7 @@ Space Complexity | Time Complexity | Estimation Error %
 15. main()
 ```
 
-Approach 2: Maintain a hasmap in the memory. So whenever a new element comes, it looks up the element in the map. If element exists then it updates the count of the element. If the element doesn't exist then it adds the element in the map and initialize its count with 1. The length of the map is the Cardinality of the set which we are looking for.
+Approach 2: Maintain a hashmap in memory. So whenever a new element comes, it looks up the element in the map. If the element exists then it updates the count of the element. If the element doesn't exist then it adds the element in the map and initializes its count with 1. The length of the map is the Cardinality of the set which we are looking for.
 
 
 Space Complexity | Time Complexity | Estimation Error %
@@ -163,7 +163,7 @@ Space Complexity | Time Complexity | Estimation Error %
 26. main()
 ```
 
-Approach 3: There's a lot going on in the third approach. Let's get the intuition first, and then we can walk through an example to get the Cardinality of a stream using this method.
+Approach 3: A lot is going on in the third approach. Let's get the intuition first, and then we can walk through an example to get the Cardinality of a stream using this method.
 
 ##### Intuition:
 
@@ -181,27 +181,28 @@ The idea behind LogLog Estimation is to
 - The Estimation is **wrong** as we have only seen "A" so far.
 - Continue Reading for an explanation :).
 
-Park the above Estimation aside for a while, I know you must have some questions like - from where this exponent is coming into the picture, why did we hash our elements etc.
+Park the above Estimation aside for a while, I know you must have some questions like - from where this exponent is coming into the picture, why did we hash our elements, etc.
 
 Quoting from the LogLog Paper -
-> For a string x ∈ {0,1}∞, Let ρ(x) denotes the position of its first 1-bit. Thus ρ(1...) = 1, ρ(001...) = 3, etc. Clearly we expect about n/2ᵏ amongst the distinct elements of set to have a ρ value equal to k.
+> For a string x ∈ {0,1}∞, Let ρ(x) denotes the position of its first 1-bit. Thus ρ(1...) = 1, ρ(001...) = 3, etc. Clearly we expect about n/2ᵏ amongst the distinct elements of the set to have a ρ value equal to k.
 
 ```
 Let's look at it this way :
 Part A:
 Consider 2 binary strings - A = '1 _ _ _ _ _' and B = '0 _ _ _ _ _'.
-We can clearly see that the first bit divides the set of all possible strings of length 6 into two equal halves. Similarly the first 2 bits divide the set of strings into 4 equal subsets.
+We can see that the first bit divides the set of all possible strings of length 6 into two halves. Similarly the first 2 bits divide the set of strings into 4 equal subsets.
 That's why we use an exponent 2.
 
 Part B:
-The large value of the ρ indicates the large number of distinct elements. Because of uniform distribution of the hash function, we can say that the large ρ implies the high probability of having large number of distinct elements.
+The large value of the ρ indicates a large number of distinct elements. Because of the uniform distribution of the hash function, we can say that the large ρ implies the high probability of having a large number of distinct elements.
 
 Part C:
-Our Estimation was wrong because the paper clearly states that the alogrithm gives asymtotic good results i.e. as the number of elements in the stream reaches ∞, the estimation error reaches 1.30/√m where m is the number of buckets.
+Our Estimation was wrong because the paper clearly states that the algorithm gives asymptotic good results i.e. as the number of elements in the stream reaches ∞, the estimation error reaches 1.30/√m where m is the number of buckets.
 
 Part D.
-In our algorithm we've used 6 bit hash function, and a bucket size of 4, but the usual numbers are 32-bit or 64-bit hash functions and 1024 or 2^10 buckets. The paper talks about many design decisions for optimizations.
+In our algorithm we've used 6-bit hash function, and bucket size of 4, but the usual numbers are 32-bit or 64-bit hash functions and 1024 or 2^10 buckets. The paper talks about many design decisions for optimizations.
 ```
+
 ##### Example Walkthrough:
 Stream = ['a', 'b', 'c', 'd', 'e', 'f', 'b', 'c', 'e'].
 
@@ -228,7 +229,7 @@ O(m) few KBs     | O(m)  constant  | 1.30/√m
 
 
 ##### Cardinality Estimation over a distributed system.
-We can clearly see that Approach 1 and Approach 2 are non scalable solutions. If we increase the number of elements in the stream to 2^32, then (assuming each element takes k bytes) we'll need a memory of size 2^32*k bytes which is roughly K GBs. On the contrary, the LogLog uses few Kilo Bytes of Memory.
+We can see that Approach 1 and Approach 2 are non-scalable solutions. If we increase the number of elements in the stream to 2^32, then (assuming each element takes k bytes) we'll need a memory of size 2^32*k bytes which are roughly K GBs. On the contrary, the LogLog uses few KiloBytes of Memory.
 In a distributed system, the Total Cardinality of the streams seen by all the components of the system can be calculated as -
 Assuming there are D machines in a distributed system.
 Each machine maintains its LogLog Data structure as given below.
@@ -242,33 +243,34 @@ Each machine maintains its LogLog Data structure as given below.
 
     HLL_D = {x1: aD1, x2:aD2, x3:aD3, .. , xk:aDk}
 
-    We can easily merge them into HLL_Total by taking a component wise maximum of all elements i.e.
+    We can easily merge them into HLL_Total by taking a component-wise maximum of all elements i.e.
 
     HLL_Total = {x1: max(a11, a21, ..., aD1),
 
                  x2: max(a12, a22, ..., aD2), ...
 
                  xD: max(a1k, a2k, ..., aDk)}
-Thus we can get the Cardinality Estimation of distributed system with Similarly Time and Space Complexities.
+Thus we can get the Cardinality Estimation of a distributed system with similar Time and Space Complexities.
 
 
 ##### Why named LogLog??
 I think by now you must've got the idea why it is named LogLog.
-Assuming we are counting till 2^32. log2^32(base 2) = 32, assuming 2^10 buckets i.e. 1024 number of buckets, we are left with 22 digits (after 10 digits) in a 32-bit binary string.
-To store the ρ of 22-bit string we only need log(22) bits because in a 22-bit string the maximum possible value of ρ can be 22 and this number can be stored in the memory using log(22) bits i.e. ~ 5. This is the reason why the Space Complexity of this algorithm is constant (few KBs).
+Assuming we are counting till 2^32 ( log2^32(base 2) = 32). Assuming 2^10 i.e. 1024 number of buckets. We are left with 22 digits (after 10 digits) in a 32-bit binary string.
+To store the ρ of 22-bit string we only need log(22) bits because in a 22-bit string the maximum possible value of ρ can be 22 and this number can be stored in the memory using log(22) bits i.e. ~ 5. This is the reason why the Space Complexity of this algorithm is constant (a few KBs).
 
 ##### Some Notes on SuperLogLog and HyperLogLog.
-**SuperLogLog**: The LogLog paper talks about few engineering optimizations like Truncation Rule and Restriction Rule which when combined with the LogLog algorithm yields a new algorithm, SuperLogLog
-1. Truncation Rule: This rule simply states that when we are calculating the arithmetic mean of the HLL map that we've constructed, just drop the top k % of the values which is found to be 30% for optimal estimation.
-if HLL_1 = {x1: a1, x2:a2, x3:a3, .. , x100:a100} (sorted on a), then drop 0.3k elements from the top i.e. HLL_1 = {x31: a31, x32:a32, x33:a33, .. , x100:a100}
+**SuperLogLog**: The LogLog paper talks about a few engineering optimizations like Truncation Rule and Restriction Rule which when combined with the LogLog algorithm yields a new algorithm, SuperLogLog
+1. Truncation Rule: This rule simply states that when we are calculating the arithmetic mean of the HLL map, just drop the top k % values. The optimal value of k is found to be 30% for the best estimation.
+
+If HLL_1 = {x1: a1, x2:a2, x3:a3, .. , x100:a100} (sorted on a), then drop 0.3k elements from the top i.e. HLL_1 = {x31: a31, x32:a32, x33:a33, .. , x100:a100}
 
 2. Restriction Rule: This rule bounds the number of buckets to be used.
 
-**HyperLogLog**: The HyperLogLog uses a Harmonic mean instead of Geometric Mean. If HLL_1 = {x1: a1, x2:a2, x3:a3, .. , x100:a100} then the estimtion becomes ~ ( 2^-a1 + 2^-a2 + 2^-a3 + ... + 2^-a100) / m^-1.
+**HyperLogLog**: The HyperLogLog uses a Harmonic mean instead of Geometric Mean. If HLL_1 = {x1: a1, x2:a2, x3:a3, .. , x100:a100} then the estimation becomes ~ ( 2^-a1 + 2^-a2 + 2^-a3 + ... + 2^-a100) / m^-1.
 
 
 ##### Conclusion
-Having LogLog Cardinality Estimation in our bag of algorithms now we can estimate cardinalities without worrying about space. Our webpage now can be hosted on a machine having few gigs of memory with maintaining the count of distinct users that have landed on the page. With the emergence of IOT the number of IPs will grow like crazy, from IPv4 to IPv6. The HyperLogLog will save the day.
+Having LogLog Cardinality Estimation in our bag of algorithms now we can estimate cardinalities without worrying about space. Our webpage now can be hosted on a machine having few gigs of memory with maintaining the count of distinct users that have landed on the page. With the emergence of IoT the number of IPs will grow like crazy, from IPv4 to IPv6. The HyperLogLog will save the day.
 
 
 
