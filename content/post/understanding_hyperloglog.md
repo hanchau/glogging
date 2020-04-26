@@ -72,9 +72,9 @@ Whenever a new element comes, dump it into the big data store, and rerun the [co
 ```
 1. def distinct(L):
 2.    counter = 1
-# loop 1
+      # loop 1
 3.    for i in range(1,len(L)):
-# loop 2
+          # loop 2
 4.        for j in range(0,i):
 5.            if L[i]==L[j]:
 6.                break
@@ -86,9 +86,9 @@ Whenever a new element comes, dump it into the big data store, and rerun the [co
 12.     while True:
 13.         new_elem = get_new_elem()
 14.         dump(new_elem, D)
-# Space Complexity = O(n)
+            # Space Complexity = O(n)
 15.         L = Load(D)
-# Time Complexity = O(n^2)
+            # Time Complexity = O(n^2)
 16.         crdnlty = distinct(L)
 17.
 18. main()
@@ -103,19 +103,20 @@ Space Complexity | Time Complexity | Estimation Error %
 
 ```
 1. def distinct(new_elem, _hMap):
-2.    if Lookup(new_elem,_hMap):         # Lookup in Hashmap = O(1)
+      # Lookup in Hashmap = O(1)
+2.    if Lookup(new_elem,_hMap):
 3.        _hMap[new_elem] += 1
 4.    else:
 5.        _hMap[new_elem] = 1
 6.    return len(_hMap)
 7.
 8. def main():
-# A Hash Map, Space C - O(n)
+      # A Hash Map, Space C - O(n)
 9.    _hMap = {}
 10.   while True:
 11.       new_elem = get_new_elem()
 12.       distinct(new_elem, _hMap)
-# Time Complexity = O(1)
+          # Time Complexity = O(1)
 13.       crdnlty = distinct(new_elem,_hmap)
 14.
 15. main()
@@ -148,15 +149,15 @@ Space Complexity | Time Complexity | Estimation Error %
 15.    return LLEstimate
 16.
 17. def main():
-# Hash Map of Space Cmplxty - O(m)
-# `m` is the number of buckets
-18.    LL = { '00':0, '01':0,
+      # Hash Map of Space Cmplxty - O(m)
+      # `m` is the number of buckets
+18.   LL = { '00':0, '01':0,
 19.          '10':0, '11':0 }
 20.
 21.   while True:
 22.       new_elem = get_new_elem()
 23.       addToLogLog(new_elem, LL)
-# Time Complexity = O(m)
+          # Time Complexity = O(m)
 24.       crdnlty = getLLEstimate(LL)
 25.
 26. main()
@@ -167,7 +168,7 @@ Approach 3: There's a lot going on in the third approach. Let's get the intuitio
 ##### Intuition:
 
 The idea behind LogLog Estimation is to
-- Map your arbitrary stream to a uniformly distributed hash function,
+- Map the arbitrary stream to a uniformly distributed hash function,
 - Observe the bit pattern of the hash seen so far,
 - Make an Estimation attempt assuming the uniform distribution.
 
@@ -232,21 +233,22 @@ In a distributed system, the Total Cardinality of the streams seen by all the co
 Assuming there are D machines in a distributed system.
 Each machine maintains its LogLog Data structure as given below.
 
-HLL_1 = {x1: a11, x2:a12, x3:a13, .. , xk:a1k}
-HLL_2 = {x1: a21, x2:a22, x3:a23, .. , xk:a2k}
-.
-.
-.
-HLL_D = {x1: aD1, x2:aD2, x3:aD3, .. , xk:aDk}
+    HLL_1 = {x1: a11, x2:a12, x3:a13, .. , xk:a1k}
 
-We can easily merge them into HLL_Total by taking a component wise maximum of all elements i.e.
+    HLL_2 = {x1: a21, x2:a22, x3:a23, .. , xk:a2k}
+    .
+    .
+    .
 
-HLL_Total = {x1: max(a11, a21, ..., aD1),
-             x2: max(a12, a22, ..., aD2),
-             .
-             .
-             .
-             xD: max(a1k, a2k, ..., aDk)}
+    HLL_D = {x1: aD1, x2:aD2, x3:aD3, .. , xk:aDk}
+
+    We can easily merge them into HLL_Total by taking a component wise maximum of all elements i.e.
+
+    HLL_Total = {x1: max(a11, a21, ..., aD1),
+
+                 x2: max(a12, a22, ..., aD2), ...
+
+                 xD: max(a1k, a2k, ..., aDk)}
 Thus we can get the Cardinality Estimation of distributed system with Similarly Time and Space Complexities.
 
 
