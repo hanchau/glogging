@@ -72,8 +72,10 @@ Whenever a new element comes, dump it into the big data store, and rerun the [co
 ```
 1. def distinct(L):
 2.    counter = 1
-3.    for i in range(1,len(L)):             # loop 1
-4.        for j in range(0,i):              # loop 2
+# loop 1
+3.    for i in range(1,len(L)):
+# loop 2
+4.        for j in range(0,i):
 5.            if L[i]==L[j]:
 6.                break
 7.        if i==j+1:
@@ -84,8 +86,10 @@ Whenever a new element comes, dump it into the big data store, and rerun the [co
 12.     while True:
 13.         new_elem = get_new_elem()
 14.         dump(new_elem, D)
-15.         L = Load(D)                     # Space Complexity = O(n)
-16.         crdnlty = distinct(L)           # Time Complexity = O(n^2)
+# Space Complexity = O(n)
+15.         L = Load(D)
+# Time Complexity = O(n^2)
+16.         crdnlty = distinct(L)
 17.
 18. main()
 ```
@@ -106,14 +110,15 @@ Space Complexity | Time Complexity | Estimation Error %
 6.    return len(_hMap)
 7.
 8. def main():
-9.    _hMap = {}                         # A Hash Map, Space C - O(n)
+# A Hash Map, Space C - O(n)
+9.    _hMap = {}
 10.   while True:
 11.       new_elem = get_new_elem()
 12.       distinct(new_elem, _hMap)
+# Time Complexity = O(1)
 13.       crdnlty = distinct(new_elem,_hmap)
-14.                                      # Time Complexity = O(1)
-15.
-16. main()
+14.
+15. main()
 ```
 
 Approach 2: Maintain a hasmap in the memory. So whenever a new element comes, it looks up the element in the map. If element exists then it updates the count of the element. If the element doesn't exist then it adds the element in the map and initialize its count with 1. The length of the map is the Cardinality of the set which we are looking for.
@@ -127,32 +132,34 @@ Space Complexity | Time Complexity | Estimation Error %
 #### Approach 3: LogLog Estimation
 ```
 1. def addToLogLog(new_elem, LL):
-1.    hash_elem = hash(new_elem)
-1.    frst_2_bits = f_2_bits(hash_elem)
-1.    last_4_bits = l_2_bits(hash_elem)
-1.    old_max = LL.get(frst_2_bits)
-1.    rho_elem = rho(last_4_bits)
-1.    new_max = Max(old_max, rho_elem)
-1.    LL.update( {first_2_bits: new_max})
-1.
-1. def getLLEstimate(LL):
-1.    sumLL = Sum(LL.values())
-1.    lenLL = len(LL)
-1.    arith_mean = sumLL/lenLL
-1.    LLEstimate = 2**arith_mean
-1.    return LLEstimate
-1.
-8. def main():
-9.    LL = { '00':0, '01':0,   # Hash Map of Space Cmplxty - O(m)
-11.          '10':0, '11':0 }  # `m` is the number of buckets
-11.
-10.   while True:
-11.       new_elem = get_new_elem()
-12.       addToLogLog(new_elem, LL)
-13.       crdnlty = getLLEstimate(LL)
-14.                            # Time Complexity = O(m)
-15.
-16. main()
+2.    hash_elem = hash(new_elem)
+3.    frst_2_bits = f_2_bits(hash_elem)
+4.    last_4_bits = l_2_bits(hash_elem)
+5.    old_max = LL.get(frst_2_bits)
+6.    rho_elem = rho(last_4_bits)
+7.    new_max = Max(old_max, rho_elem)
+8.    LL.update( {first_2_bits: new_max})
+9.
+10. def getLLEstimate(LL):
+11.    sumLL = Sum(LL.values())
+12.    lenLL = len(LL)
+13.    arith_mean = sumLL/lenLL
+14.    LLEstimate = 2**arith_mean
+15.    return LLEstimate
+16.
+17. def main():
+# Hash Map of Space Cmplxty - O(m)
+# `m` is the number of buckets
+18.    LL = { '00':0, '01':0,
+19.          '10':0, '11':0 }
+20.
+21.   while True:
+22.       new_elem = get_new_elem()
+23.       addToLogLog(new_elem, LL)
+# Time Complexity = O(m)
+24.       crdnlty = getLLEstimate(LL)
+25.
+26. main()
 ```
 
 Approach 3: There's a lot going on in the third approach. Let's get the intuition first, and then we can walk through an example to get the Cardinality of a stream using this method.
@@ -222,7 +229,6 @@ O(m) few KBs     | O(m)  constant  | 1.30/√m
 ##### Cardinality Estimation over a distributed system.
 We can clearly see that Approach 1 and Approach 2 are non scalable solutions. If we increase the number of elements in the stream to 2^32, then (assuming each element takes k bytes) we'll need a memory of size 2^32*k bytes which is roughly K GBs. On the contrary, the LogLog uses few Kilo Bytes of Memory.
 In a distributed system, the Total Cardinality of the streams seen by all the components of the system can be calculated as -
-```
 Assuming there are D machines in a distributed system.
 Each machine maintains its LogLog Data structure as given below.
 
@@ -242,7 +248,7 @@ HLL_Total = {x1: max(a11, a21, ..., aD1),
              .
              xD: max(a1k, a2k, ..., aDk)}
 Thus we can get the Cardinality Estimation of distributed system with Similarly Time and Space Complexities.
-```
+
 
 ##### Why named LogLog??
 I think by now you must've got the idea why it is named LogLog.
