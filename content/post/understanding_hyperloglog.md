@@ -190,7 +190,7 @@ Quoting from the LogLog Paper -
 Let's look at it this way :
 Part A:
 Consider 2 binary strings - A = '1 _ _ _ _ _' and B = '0 _ _ _ _ _'.
-We can see that the first bit divides the set of all possible strings of length 6 into two halves. Similarly the first 2 bits divide the set of strings into 4 equal subsets.
+We can see that the first bit divides the set of all possible strings of length 6 into two halves. Similarly the first 2 bits divide the set of strings into 4 quarters.
 That's why we use an exponent 2.
 
 Part B:
@@ -221,7 +221,7 @@ HLL buckets | elem | ρ
 00:1, 01:4, 10:3, 11:3  | 01 00 10  | 3
 00:1, 01:4, 10:3, 11:3  | -  | -
 
-Now the Estimate is ~ `2^(11/4) i.e. 2^2.8 ~ 7` which is pretty a good estimate as we have 6 distinct elements in our stream.
+Now the Estimate is ~ `2^(11/4) i.e. 2^2.8 ~ 7` which is a pretty good estimate as we have 6 distinct elements in our stream.
 
 Space Complexity | Time Complexity | Estimation Error %
 -----------------|-----------------|-------------------
